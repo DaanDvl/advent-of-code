@@ -24,7 +24,7 @@ import java.util.*;
  */
 @UtilityClass
 class SolutionUtils {
-    File resources = new File(System.getProperty("user.dir") + "\\inputs");
+    File resources = new File(System.getProperty("user.dir") + "/inputs");
     boolean download = true;
     private String session;
 

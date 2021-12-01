@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
         optionListHeading = "%n@|bold,underline Options|@:%n")
 public class SolutionRunner implements Runnable {
     @Option(names = {"-p", "--package"}, description = "The package where the solutions are found.", showDefaultValue = Help.Visibility.ALWAYS)
-    String pkg = Solution.class.getPackageName();
+    String pkg = "nl.daandvl.adventofcode.solutions";
 
     @Option(names = {"-y", "--year"}, description = "Filter solutions on this year.", interactive = true)
     Integer year;
@@ -57,7 +57,7 @@ public class SolutionRunner implements Runnable {
     Boolean submit;
 
     @Option(names = {"--inputs"}, description = "Custom location for the inputs.", showDefaultValue = Help.Visibility.ALWAYS)
-    File inputs = new File(System.getProperty("user.dir") + "\\inputs");
+    File inputs = new File(System.getProperty("user.dir") + "/inputs");
 
     @Override
     public void run() {
