@@ -7,20 +7,14 @@ import nl.underkoen.adventofcode.utils.InputUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Day01 extends Solution {
-    @Getter private final int day = 01;
+    @Getter private final int day = 1;
     @Getter private final int year = 2021;
 
     @Override
     public long[] getCorrectOutput() {
-        return new long[]{};
-    }
-
-    @Override
-    public String[] getCorrectOutputText() {
-        return new String[]{};
+        return new long[]{1521, 1543};
     }
 
     @Override
