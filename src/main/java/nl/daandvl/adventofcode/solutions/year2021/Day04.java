@@ -20,7 +20,6 @@ public class Day04 extends Solution {
 
     @Override
     protected void run(List<String> input) {
-        //TODO write implementation
         String[] numbersToBePulled = input.get(0).split(",");
 
         for (int i = 2; i < input.size(); i += 6) {
@@ -105,7 +104,6 @@ public class Day04 extends Solution {
                     }
                 }
                 if(corr) {
-//                    System.out.println(Arrays.asList(line));
                     return true;
                 }
             }
@@ -160,11 +158,6 @@ public class Day04 extends Solution {
         public BoardEntry(String val, boolean found) {
             this.val = val;
             this.found = found;
-        }
-
-        @Override
-        public String toString() {
-            return val + (found ? "!" : "");
         }
     }
 }
