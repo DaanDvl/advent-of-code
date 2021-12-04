@@ -15,7 +15,7 @@ public class Day03 extends Solution {
 
     @Override
     public long[] getCorrectOutput() {
-        return new long[]{};
+        return new long[]{3901196, 4412188};
     }
 
     @Override
