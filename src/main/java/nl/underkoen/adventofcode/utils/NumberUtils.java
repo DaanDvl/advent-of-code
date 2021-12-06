@@ -22,6 +22,16 @@ public class NumberUtils {
         return r;
     }
 
+    public boolean isInBetween(int val, int n1, int n2) {
+        if (n1 < n2) {
+            return val >= n1 && val <= n2;
+        } else if (n1 > n2) {
+            return val <= n1 && val >= n2;
+        }
+
+        return val == n1;
+    }
+
     /**
      * Finds a number where each modulo of mods gives remainders
      * Reworked https://rosettacode.org/wiki/Chinese_remainder_theorem#Java
