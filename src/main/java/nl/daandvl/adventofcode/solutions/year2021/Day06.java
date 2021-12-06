@@ -4,9 +4,8 @@ import lombok.Getter;
 import nl.underkoen.adventofcode.solutions.Solution;
 import nl.underkoen.adventofcode.utils.InputUtils;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Day06 extends Solution {
@@ -20,35 +19,38 @@ public class Day06 extends Solution {
 
     @Override
     protected void run(List<String> input) {
-        Map<Long, Long> allFish = new HashMap<>();
+        long[] allFish = new long[9];
 
-        List<Long> longInput = InputUtils.asNumberList(input).collect(Collectors.toList());
-        for (long num : longInput) {
-            allFish.put(num, 1 + allFish.getOrDefault(num, 0L));
+        List<Integer> longInput = InputUtils.asIntegerList(input).collect(Collectors.toList());
+
+        for (int i = 0; i < 9; i++) {
+            allFish[i] = 0;
         }
 
-        for (int i = 1; i < 257; i++) {
+        for (int i : longInput) {
+            allFish[i] = 1 + allFish[i];
+        }
+
+        for (int i = 1; i <= 256; i++) {
             allFish = evolve(allFish);
-            if(i == 80) a = allFish.values().stream().mapToLong(Long::longValue).sum();
+            if (i == 80) a = Arrays.stream(allFish).sum();
         }
 
-        b = allFish.values().stream().mapToLong(Long::longValue).sum();
-
+        b = Arrays.stream(allFish).sum();
     }
 
-    public Map<Long, Long> evolve(Map<Long, Long> fish) {
-        Map<Long, Long> res = new HashMap<>();
+    public long[] evolve(long[] fish) {
+        long[] res = new long[9];
 
-        res.put(0L, fish.getOrDefault(1L, 0L));
-        res.put(1L, fish.getOrDefault(2L, 0L));
-        res.put(2L, fish.getOrDefault(3L, 0L));
-        res.put(3L, fish.getOrDefault(4L, 0L));
-        res.put(4L, fish.getOrDefault(5L, 0L));
-        res.put(5L, fish.getOrDefault(6L, 0L));
-        res.put(6L, fish.getOrDefault(7L, 0L) + fish.getOrDefault(0L, 0L));
-        res.put(7L, fish.getOrDefault(8L, 0L));
-        res.put(8L, fish.getOrDefault(0L, 0L));
+        for (int i = 0; i < 9; i++) {
+            if(i == 8) {
+                res[i] = fish[0];
+                continue;
+            }
+            res[i] = fish[i+1];
+        }
 
+        res[6] += fish[0];
         return res;
     }
 

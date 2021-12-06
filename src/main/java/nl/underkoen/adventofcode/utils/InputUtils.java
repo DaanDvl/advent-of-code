@@ -21,9 +21,17 @@ import java.util.stream.Stream;
 public class InputUtils {
     public final String DEFAULT_SPLIT = "[, ] ?";
 
-    private Long tryParse(String s) {
+    private Long tryParseLong(String s) {
         try {
             return Long.parseLong(s);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private Integer tryParseInteger(String s) {
+        try {
+            return Integer.parseInt(s);
         } catch (Exception e) {
             return null;
         }
@@ -36,7 +44,14 @@ public class InputUtils {
     public Stream<Long> asNumberList(List<String> input, String regex) {
         return input.stream()
                 .flatMap(s -> Arrays.stream(s.split(regex)))
-                .map(InputUtils::tryParse)
+                .map(InputUtils::tryParseLong)
+                .filter(Objects::nonNull);
+    }
+
+    public Stream<Integer> asIntegerList(List<String> input) {
+        return input.stream()
+                .flatMap(s -> Arrays.stream(s.split(DEFAULT_SPLIT)))
+                .map(InputUtils::tryParseInteger)
                 .filter(Objects::nonNull);
     }
 
@@ -47,7 +62,7 @@ public class InputUtils {
     public Stream<Stream<Long>> asLineNumberList(List<String> input, String regex) {
         return input.stream()
                 .map(s -> Arrays.stream(s.split(regex)))
-                .map(s -> s.map(InputUtils::tryParse)
+                .map(s -> s.map(InputUtils::tryParseLong)
                         .filter(Objects::nonNull));
     }
 
@@ -69,7 +84,7 @@ public class InputUtils {
     public Stream<Position> asPositionList(List<String> input, String regex) {
         return input.stream()
                 .map(s -> Arrays.stream(s.split(regex)))
-                .map(s -> s.map(InputUtils::tryParse)
+                .map(s -> s.map(InputUtils::tryParseLong)
                         .filter(Objects::nonNull))
                 .map(s -> s.collect(Collectors.toList()))
                 .map(s -> new Position(s.get(0), s.get(1)));
