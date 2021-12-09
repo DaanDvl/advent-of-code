@@ -19,7 +19,6 @@ public class Day08 extends Solution {
 
     @Override
     protected void run(List<String> input) {
-
         for(String line : input) {
             String[] parts = line.split("( \\| )");
             String[] in = parts[0].split(" ");
