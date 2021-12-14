@@ -92,6 +92,18 @@ public class MapUtils {
         reduce(map, c -> c);
     }
 
+    public <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
+
     public <K, V, C extends Collection<V>> Map<K, V> reduce(Map<K, C> map, Function<C, C> supplier) {
         Map<K, V> keys = new HashMap<>();
         map = deepCopy(map, supplier);
